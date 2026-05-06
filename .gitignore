@@ -2,7 +2,7 @@
 node_modules/
 
 # Uploads and User Media
-uploads/
+# uploads/
 
 # Environment Variables
 .env
