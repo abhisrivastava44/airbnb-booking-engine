@@ -112,16 +112,21 @@ app.use("/host", hostRouter);
 
 app.use(errorsController.pageNotFound);
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 mongoose
   .connect(DB_PATH)
   .then(() => {
     console.log("Connected to mongoDB");
-    app.listen(PORT, () => {
-      console.log(`server is runnig on address http://localhost:${PORT}`);
-    });
+
+    if (process.env.NODE_ENV !== "production") {
+      app.listen(PORT, () => {
+        console.log(`server is running on address http://localhost:${PORT}`);
+      });
+    }
   })
   .catch((error) => {
     console.log("Error while connecting to Mongo: ", error);
   });
+
+module.exports = app;
