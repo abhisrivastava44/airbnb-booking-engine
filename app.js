@@ -14,7 +14,7 @@ const DB_PATH =
 //local module
 const storeRouter = require("./routes/storeRouter");
 const hostRouter = require("./routes/hostRouter");
-const authRouter = require("./routes/AuthRouter");
+const authRouter = require("./routes/authRouter");
 const rootDirectory = require("./utilities/pathUtil");
 const errorsController = require("./controllers/errors");
 
