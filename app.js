@@ -8,8 +8,7 @@ const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
 const { default: mongoose } = require("mongoose");
 const multer = require("multer");
-const DB_PATH =
-  "mongodb+srv://root:Srivast4103a@statedlearningmongodb.anzikpn.mongodb.net/airbnb?appName=StatedLearningMongoDb";
+const DB_PATH = process.env.MONGODB_URI;
 
 //local module
 const storeRouter = require("./routes/storeRouter");
