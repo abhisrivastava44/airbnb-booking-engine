@@ -1,0 +1,79 @@
+<%- include('../partials/head') %>
+<body class="bg-white flex flex-col min-h-screen">
+  
+  <%- include('../partials/nav') %>
+
+  <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
+    
+    <!-- Page Header -->
+    <div class="mb-8 border-b border-gray-200 pb-6">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">Your Favourites</h2>
+      <p class="text-gray-500 mt-2 text-lg">Places you've saved for later</p>
+    </div>
+
+    <% if (favouriteHomes.length === 0) { %>
+      <!-- Empty State (Shows if no favourites) -->
+      <div class="text-center py-20">
+        <i class="fa-regular fa-heart text-6xl text-gray-300 mb-4"></i>
+        <h3 class="text-2xl font-semibold text-gray-900">Nothing saved yet</h3>
+        <p class="text-gray-500 mt-2 mb-6 text-lg">As you search, tap the heart icon to save your favorite places.</p>
+        <a href="/homes" class="bg-rose-500 text-white font-medium px-8 py-3.5 rounded-lg hover:bg-rose-600 transition-all shadow-md">
+          Explore Homes
+        </a>
+      </div>
+    <% } else { %>
+      <!-- Favourites Grid -->
+      <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
+        <% favouriteHomes.forEach(Home => { %>
+          <li class="group flex flex-col relative">
+            
+            <!-- Home Image -->
+            <a href="/homes/<%= Home._id %>" class="relative w-full overflow-hidden rounded-xl bg-gray-200 mb-4 block">
+              <img 
+                src="<%= Home.photo %>" 
+                alt="<%= Home.houseName %>"
+                class="h-72 w-full object-cover object-center group-hover:scale-105 transition-transform duration-300 ease-in-out"
+              />
+            </a>
+
+            <!-- Card Info -->
+            <div class="flex justify-between items-start">
+              <div class="flex-1 pr-4">
+                <h3 class="font-semibold text-gray-900 text-lg leading-tight truncate">
+                  <%= Home.houseName %>
+                </h3>
+                <p class="text-gray-500 text-sm mt-1">
+                  <i class="fa-solid fa-location-dot text-gray-400 mr-1.5"></i><%= Home.location %>
+                </p>
+              </div>
+              
+              <!-- Rating -->
+              <div class="flex items-center gap-1.5 text-sm font-medium text-gray-800">
+                <i class="fa-solid fa-star text-xs text-gray-800"></i>
+                <span><%= Home.rating %></span>
+              </div>
+            </div>
+
+            <!-- Price & Remove Button row -->
+            <div class="mt-3 flex items-center justify-between">
+              <p class="text-gray-900 font-semibold text-lg">
+                ₹<%= Home.price %> <span class="text-gray-500 font-normal text-sm">night</span>
+              </p>
+              
+              <!-- Sleek Delete Action -->
+              <form action="/favourites/delete/<%= Home._id %>" method="POST">
+                <button type="submit" class="text-rose-500 hover:text-rose-700 bg-rose-50 hover:bg-rose-100 font-medium px-3 py-1.5 rounded-lg text-sm transition-colors flex items-center gap-1.5">
+                  <i class="fa-solid fa-trash-can"></i> Remove
+                </button>
+              </form>
+            </div>
+            
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+    
+  </main>
+
+</body>
+</html>

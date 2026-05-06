@@ -1,0 +1,10 @@
+<form action="/favourites" method="POST" class="w-full">
+  <button
+    type="submit"
+    class="w-full border-2 border-gray-900 text-gray-900 font-semibold py-3 rounded-lg hover:bg-gray-50 hover:border-gray-900 transition-all duration-300 flex items-center justify-center gap-2"
+  >
+    <i class="fa-regular fa-heart text-lg"></i>
+    Save to Favourites
+  </button>
+  <input type="hidden" name="id" value="<%= home._id %>" />
+</form>

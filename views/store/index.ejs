@@ -1,0 +1,77 @@
+<%- include('../partials/head') %>
+  <body class="bg-white">
+
+    <%- include('../partials/nav') %>
+
+    <!-- Hero Section -->
+    <div class="bg-gray-50 border-b border-gray-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center md:py-24">
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 mb-4">
+          Find your next getaway
+        </h1>
+        <p class="text-xl text-gray-500 max-w-2xl mx-auto">
+          Discover incredible places to stay across the globe. From cozy cabins to luxury villas.
+        </p>
+      </div>
+    </div>
+
+    <!-- Main Grid Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      
+      <!-- Grid Layout: 1 col on mobile, 2 on tablet, 4 on desktop -->
+      <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
+        
+        <% registeredHomes.forEach(Home => { %>
+          <li class="group cursor-pointer flex flex-col">
+            
+            <!-- Home Image with hover zoom -->
+            <div class="relative w-full overflow-hidden rounded-xl bg-gray-200 mb-4">
+              <img 
+                src="<%= Home.photo %>" 
+                alt="<%= Home.houseName %>"
+                class="h-72 w-full object-cover object-center group-hover:scale-105 transition-transform duration-300 ease-in-out"
+              />
+              <!-- Optional: Add a heart icon in the top right like real Airbnb -->
+              <div class="absolute top-3 right-3 text-white opacity-80 hover:opacity-100 hover:scale-110 transition-all">
+                <i class="fa-regular fa-heart text-2xl"></i>
+              </div>
+            </div>
+
+            <!-- Card Info -->
+            <div class="flex justify-between items-start">
+              <div class="flex-1 pr-4">
+                <h3 class="font-semibold text-gray-900 text-lg leading-tight truncate">
+                  <%= Home.houseName %>
+                </h3>
+                <p class="text-gray-500 text-sm mt-1">
+                  <i class="fa-solid fa-location-dot text-gray-400 mr-1.5"></i><%= Home.location %>
+                </p>
+              </div>
+              
+              <!-- Rating -->
+              <div class="flex items-center gap-1.5 text-sm font-medium text-gray-800">
+                <i class="fa-solid fa-star text-xs text-gray-800"></i>
+                <span><%= Home.rating %></span>
+              </div>
+            </div>
+
+            <!-- Price & Button row -->
+            <div class="mt-2 flex items-center justify-between">
+              <p class="text-gray-900 font-semibold text-lg">
+                ₹<%= Home.price %> <span class="text-gray-500 font-normal text-sm">night</span>
+              </p>
+              
+              <!-- Button appears on card hover -->
+              <a href="#" class="opacity-0 group-hover:opacity-100 bg-rose-500 text-white text-sm px-4 py-1.5 rounded-full hover:bg-rose-600 transition-all duration-300">
+                Book
+              </a>
+            </div>
+
+          </li>
+        <% }) %>
+
+      </ul>
+    </main>
+
+  </body>
+</html>
